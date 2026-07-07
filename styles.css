@@ -1,0 +1,334 @@
+*, *::before, *::after{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root{
+        --bg-color: #0f172a;
+        --bg-nav: rgba(15, 23, 42, 0.75);
+        --bg-column: #1e293b;
+        --bg-task: #334155;
+        --bg-task-hover: #3f4f66;
+        --bg-button-color: #3b82f6;
+        --bg-button-hover: #2563eb;
+        --primary-text-color: #f8fafc;
+        --secondary-text-color: #94a3b8;
+        --delete-color: rgba(239, 68, 68, 0.1);
+        --delete-text: #ef4444;
+        --delete-hover: #ef4444;
+        --delete-hover-text: #ffffff;
+        --border-color: #334155;
+        
+        /* padding */
+        --nav-padding: 16px 32px;
+        --section-padding: 24px 32px;
+        --padding-s: 8px;
+        --padding-m: 16px;
+        --padding-l: 24px;
+        --padding-xl: 32px;
+
+        /* border-radius variables*/
+        --border-radius-s: 8px;
+        --border-radius-m: 12px;
+        --border-radius-l: 16px;
+    }
+
+    body{
+        min-height: 100vh;
+        background-color: var(--bg-color);
+        color: var(--primary-text-color);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background-image: 
+            radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+        background-attachment: fixed;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar{
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track{
+        background: var(--bg-color); 
+    }
+    ::-webkit-scrollbar-thumb{
+        background: var(--bg-task); 
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover{
+        background: var(--secondary-text-color); 
+    }
+
+    main{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav{
+        padding: var(--nav-padding);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: var(--bg-nav);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    nav .left{
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    nav .left::before{
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        background: var(--bg-button-color);
+        border-radius: 3px;
+    }
+
+    nav button{
+        background-color: var(--bg-button-color);
+        border: none;
+        outline: none;
+        color: white;
+        padding: 10px 20px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        cursor: pointer;
+        border-radius: var(--border-radius-s);
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    nav button:hover{
+        background-color: var(--bg-button-hover);
+        transform: translateY(-1px);
+    }
+
+    section{
+        padding: var(--section-padding);
+        display: flex;
+        flex-grow: 1;
+        gap: 24px;
+        overflow-x: auto;
+        align-items: flex-start;
+    }
+
+    section .task-column{
+        background-color: var(--bg-column);
+        min-width: 320px;
+        flex: 1;
+        padding: var(--padding-m);
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding-m);
+        border-radius: var(--border-radius-l);
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    section .task-column.hover-over{
+        border: 2px dashed var(--bg-button-color);
+        background-color: rgba(30, 41, 59, 0.8);
+        transform: scale(1.02);
+    }
+
+    .heading{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 4px;
+    }
+
+    .heading .left{
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--primary-text-color);
+    }
+
+    .heading .right{
+        background: var(--bg-task);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--secondary-text-color);
+    }
+
+    .task{
+        background-color: var(--bg-task);
+        padding: var(--padding-m);
+        border-radius: var(--border-radius-m);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        cursor: grab;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+        position: relative;
+    }
+
+    .task:hover{
+        background-color: var(--bg-task-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    }
+
+    .task:active{
+        cursor: grabbing;
+    }
+
+    .task.dragging{
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+
+    .task h2{
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: var(--primary-text-color);
+    }
+
+    .task p{
+        font-size: 0.875rem;
+        color: var(--secondary-text-color);
+        line-height: 1.5;
+    }
+
+    .delete-btn{
+        align-self: flex-end;
+        cursor: pointer;
+        padding: 6px 12px;
+        border-radius: var(--border-radius-s);
+        border: none;
+        outline: none;
+        background-color: var(--delete-color);
+        color: var(--delete-text);
+        font-weight: 500;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .delete-btn:hover{
+        background-color: var(--delete-hover);
+        color: var(--delete-hover-text);
+    }
+
+    /* Modal Styles */
+    .modal{
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        z-index: 50;
+    }
+
+    .modal.active{
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+    }
+
+    .modal .bg{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(15, 23, 42, 0.6); 
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal .center{
+        background-color: var(--bg-column);
+        padding: var(--padding-xl);
+        border-radius: var(--border-radius-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--padding-m);
+        z-index: 10;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--border-color);
+        transform: translateY(20px) scale(0.95);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal.active .center{
+        transform: translateY(0) scale(1);
+    }
+
+    .modal .center h2{
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+    }
+
+    .modal .center input, 
+    .modal .center textarea{
+        background-color: var(--bg-task);
+        border: 1px solid transparent;
+        outline: none;
+        color: var(--primary-text-color);
+        padding: 12px 16px;
+        border-radius: var(--border-radius-s);
+        font-family: inherit;
+        font-size: 0.95rem;
+        transition: border-color 0.2s;
+    }
+    
+    .modal .center textarea{
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .modal .center input:focus, 
+    .modal .center textarea:focus {
+        border-color: var(--bg-button-color);
+    }
+
+    .modal .center button{
+        background-color: var(--bg-button-color);
+        border: none;
+        outline: none;
+        color: white;
+        padding: 12px 24px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: var(--border-radius-s);
+        width: 100%;
+        margin-top: 8px;
+        transition: background-color 0.2s;
+    }
+
+    .modal .center button:hover{
+        background-color: var(--bg-button-hover);
+    }
